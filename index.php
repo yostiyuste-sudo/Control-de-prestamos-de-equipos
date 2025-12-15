@@ -11,59 +11,38 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     <meta charset="UTF-8">
     <title>Control de Préstamos</title>
     <link rel="stylesheet" href="public/assets/style.css">
+
+    <style>
+        .error-msg {
+            color: #b00020;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+    </style>
 </head>
-
-<script>
-function validarFormulario() {
-    const equipo = document.getElementById("equipo").value;
-    const serial = document.getElementById("serial").value;
-    const aprendiz = document.getElementById("aprendiz").value;
-    const ficha = document.getElementById("ficha").value;
-
-    // Solo letras
-    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-
-    // Letras y números
-    const letrasNumeros = /^[A-Za-z0-9]+$/;
-
-    // Solo números
-    const soloNumeros = /^[0-9]+$/;
-
-    if (!soloLetras.test(equipo)) {
-        alert("El campo Equipo solo puede contener letras");
-        return false;
-    }
-
-    if (!letrasNumeros.test(serial)) {
-        alert("El Serial solo puede contener letras y números, sin símbolos");
-        return false;
-    }
-
-    if (!soloLetras.test(aprendiz)) {
-        alert("El campo Aprendiz solo puede contener letras");
-        return false;
-    }
-
-    if (!soloNumeros.test(ficha)) {
-        alert("El campo Ficha solo puede contener números");
-        return false;
-    }
-
-    return true;
-}
-</script>
 
 <body>
 <div class="app-container">
 <h1>Control de Préstamos de Equipos</h1>
 
-<form action="php/GuardarPrestamo.php" method="POST">
-    <input type="text" name="equipo" placeholder="Equipo" required>
-    <input type="text" name="serial" placeholder="Serial">
-    <input type="text" name="aprendiz" placeholder="Aprendiz" required>
-    <input type="text" name="ficha" placeholder="Ficha">
+<form action="php/GuardarPrestamo.php" method="POST" onsubmit="return validarFormulario();">
+
+    <input type="text" id="equipo" name="equipo" placeholder="Equipo" required>
+    <div id="error-equipo" class="error-msg"></div>
+
+    <input type="text" id="serial" name="serial" placeholder="Serial" required>
+    <div id="error-serial" class="error-msg"></div>
+
+    <input type="text" id="aprendiz" name="aprendiz" placeholder="Aprendiz" required>
+    <div id="error-aprendiz" class="error-msg"></div>
+
+    <input type="text" id="ficha" name="ficha" placeholder="Ficha" required>
+    <div id="error-ficha" class="error-msg"></div>
+
     <input type="date" name="fecha_prestamo" required>
+
     <textarea name="observaciones" placeholder="Observaciones"></textarea>
+
     <button>Guardar Préstamo</button>
 </form>
 
@@ -78,8 +57,8 @@ function validarFormulario() {
 
     <?php foreach ($prestamos as $p): ?>
     <tr>
-        <td><?= $p['equipo'] ?></td>
-        <td><?= $p['aprendiz'] ?></td>
+        <td><?= htmlspecialchars($p['equipo']) ?></td>
+        <td><?= htmlspecialchars($p['aprendiz']) ?></td>
         <td><?= $p['fecha_prestamo'] ?></td>
         <td><?= $p['devuelto'] ? 'Devuelto' : 'En préstamo' ?></td>
         <td>
@@ -91,8 +70,51 @@ function validarFormulario() {
     </tr>
     <?php endforeach; ?>
 </table>
+</div>
 
-<script src="public/assets/app.js"></script>
+<script>
+function validarFormulario() {
+    let valido = true;
+
+    const equipo = document.getElementById("equipo").value.trim();
+    const serial = document.getElementById("serial").value.trim();
+    const aprendiz = document.getElementById("aprendiz").value.trim();
+    const ficha = document.getElementById("ficha").value.trim();
+
+    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+    const letrasNumeros = /^[A-Za-z0-9]+$/;
+    const soloNumeros = /^[0-9]+$/;
+
+    // Limpiar mensajes
+    document.querySelectorAll('.error-msg').forEach(e => e.innerText = "");
+
+    if (!soloLetras.test(equipo)) {
+        document.getElementById("error-equipo").innerText =
+            "⚠️ Solo se permiten letras en el campo Equipo.";
+        valido = false;
+    }
+
+    if (!letrasNumeros.test(serial)) {
+        document.getElementById("error-serial").innerText =
+            "⚠️ El serial solo puede tener letras y números, sin símbolos.";
+        valido = false;
+    }
+
+    if (!soloLetras.test(aprendiz)) {
+        document.getElementById("error-aprendiz").innerText =
+            "⚠️ El campo Aprendiz solo admite letras.";
+        valido = false;
+    }
+
+    if (!soloNumeros.test(ficha)) {
+        document.getElementById("error-ficha").innerText =
+            "⚠️ La ficha solo puede contener números.";
+        valido = false;
+    }
+
+    return valido;
+}
+</script>
+
 </body>
 </html>
- 
