@@ -12,38 +12,69 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     <title>Control de Préstamos</title>
     <link rel="stylesheet" href="public/assets/style.css">
 
-    <style>
-        .error-msg {
-            color: #b00020;
-            font-size: 13px;
-            margin-top: 4px;
+    <script>
+        function validarSoloLetras(input, mensaje) {
+            const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            input.setCustomValidity(
+                regex.test(input.value) ? "" : mensaje
+            );
         }
-    </style>
+
+        function validarSerial(input) {
+            const regex = /^[A-Za-z0-9]+$/;
+            input.setCustomValidity(
+                regex.test(input.value) ? "" : "El Serial solo permite letras y números"
+            );
+        }
+
+        function validarSoloNumeros(input, mensaje) {
+            const regex = /^[0-9]+$/;
+            input.setCustomValidity(
+                regex.test(input.value) ? "" : mensaje
+            );
+        }
+    </script>
 </head>
 
 <body>
 <div class="app-container">
 <h1>Control de Préstamos de Equipos</h1>
 
-<form action="php/GuardarPrestamo.php" method="POST" onsubmit="return validarFormulario();">
+<form action="php/guardarprestamo.php" method="POST">
 
-    <input type="text" id="equipo" name="equipo" placeholder="Equipo" required>
-    <div id="error-equipo" class="error-msg"></div>
+    <!-- EQUIPO -->
+    <input type="text"
+           name="equipo"
+           placeholder="Equipo"
+           required
+           oninput="validarSoloLetras(this, 'El campo Equipo solo permite letras')">
 
-    <input type="text" id="serial" name="serial" placeholder="Serial" required>
-    <div id="error-serial" class="error-msg"></div>
+    <!-- SERIAL -->
+    <input type="text"
+           name="serial"
+           placeholder="Serial"
+           required
+           oninput="validarSerial(this)">
 
-    <input type="text" id="aprendiz" name="aprendiz" placeholder="Aprendiz" required>
-    <div id="error-aprendiz" class="error-msg"></div>
+    <!-- APRENDIZ -->
+    <input type="text"
+           name="aprendiz"
+           placeholder="Aprendiz"
+           required
+           oninput="validarSoloLetras(this, 'El campo Aprendiz solo permite letras')">
 
-    <input type="text" id="ficha" name="ficha" placeholder="Ficha" required>
-    <div id="error-ficha" class="error-msg"></div>
+    <!-- FICHA -->
+    <input type="text"
+           name="ficha"
+           placeholder="Ficha"
+           required
+           oninput="validarSoloNumeros(this, 'La ficha solo permite números')">
 
     <input type="date" name="fecha_prestamo" required>
 
     <textarea name="observaciones" placeholder="Observaciones"></textarea>
 
-    <button>Guardar Préstamo</button>
+    <button type="submit">Guardar Préstamo</button>
 </form>
 
 <table>
@@ -71,50 +102,7 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     <?php endforeach; ?>
 </table>
 </div>
-
-<script>
-function validarFormulario() {
-    let valido = true;
-
-    const equipo = document.getElementById("equipo").value.trim();
-    const serial = document.getElementById("serial").value.trim();
-    const aprendiz = document.getElementById("aprendiz").value.trim();
-    const ficha = document.getElementById("ficha").value.trim();
-
-    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-    const letrasNumeros = /^[A-Za-z0-9]+$/;
-    const soloNumeros = /^[0-9]+$/;
-
-    // Limpiar mensajes
-    document.querySelectorAll('.error-msg').forEach(e => e.innerText = "");
-
-    if (!soloLetras.test(equipo)) {
-        document.getElementById("error-equipo").innerText =
-            "⚠️ Solo se permiten letras en el campo Equipo.";
-        valido = false;
-    }
-
-    if (!letrasNumeros.test(serial)) {
-        document.getElementById("error-serial").innerText =
-            "⚠️ El serial solo puede tener letras y números, sin símbolos.";
-        valido = false;
-    }
-
-    if (!soloLetras.test(aprendiz)) {
-        document.getElementById("error-aprendiz").innerText =
-            "⚠️ El campo Aprendiz solo admite letras.";
-        valido = false;
-    }
-
-    if (!soloNumeros.test(ficha)) {
-        document.getElementById("error-ficha").innerText =
-            "⚠️ La ficha solo puede contener números.";
-        valido = false;
-    }
-
-    return valido;
-}
-</script>
-
+<script src="public/assets/app.js"></script>
 </body>
 </html>
+
