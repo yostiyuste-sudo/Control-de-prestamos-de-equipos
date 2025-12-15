@@ -11,64 +11,29 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     <meta charset="UTF-8">
     <title>Control de Préstamos</title>
     <link rel="stylesheet" href="public/assets/style.css">
-
-    <script>
-        function validarSoloLetras(input, mensaje) {
-            const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-            input.setCustomValidity(
-                regex.test(input.value) ? "" : mensaje
-            );
-        }
-
-        function validarSerial(input) {
-            const regex = /^[A-Za-z0-9]+$/;
-            input.setCustomValidity(
-                regex.test(input.value) ? "" : "El Serial solo permite letras y números"
-            );
-        }
-
-        function validarSoloNumeros(input, mensaje) {
-            const regex = /^[0-9]+$/;
-            input.setCustomValidity(
-                regex.test(input.value) ? "" : mensaje
-            );
-        }
-    </script>
 </head>
-
 <body>
-<div class="app-container">
+
 <h1>Control de Préstamos de Equipos</h1>
 
-<form action="php/guardarprestamo.php" method="POST">
+<form action="php/GuardarPrestamo.php" method="POST" id="formPrestamo">
 
-    <!-- EQUIPO -->
-    <input type="text"
-           name="equipo"
-           placeholder="Equipo"
-           required
-           oninput="validarSoloLetras(this, 'El campo Equipo solo permite letras')">
+    <div class="campo">
+        <input type="text" id="equipo" name="equipo" placeholder="Equipo" required>
+        <small class="error" id="error-equipo"></small>
+    </div>
 
-    <!-- SERIAL -->
-    <input type="text"
-           name="serial"
-           placeholder="Serial"
-           required
-           oninput="validarSerial(this)">
+    <input type="text" name="serial" placeholder="Serial">
 
-    <!-- APRENDIZ -->
-    <input type="text"
-           name="aprendiz"
-           placeholder="Aprendiz"
-           required
-           oninput="validarSoloLetras(this, 'El campo Aprendiz solo permite letras')">
+    <div class="campo">
+        <input type="text" id="aprendiz" name="aprendiz" placeholder="Aprendiz" required>
+        <small class="error" id="error-aprendiz"></small>
+    </div>
 
-    <!-- FICHA -->
-    <input type="text"
-           name="ficha"
-           placeholder="Ficha"
-           required
-           oninput="validarSoloNumeros(this, 'La ficha solo permite números')">
+    <div class="campo">
+        <input type="text" id="ficha" name="ficha" placeholder="Ficha">
+        <small class="error" id="error-ficha"></small>
+    </div>
 
     <input type="date" name="fecha_prestamo" required>
 
@@ -101,8 +66,9 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     </tr>
     <?php endforeach; ?>
 </table>
-</div>
+
 <script src="public/assets/app.js"></script>
 </body>
 </html>
 
+ 

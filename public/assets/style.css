@@ -160,3 +160,13 @@ a:hover {
     width: 100%;
     margin: 0;
 }
+.campo {
+    margin-bottom: 10px;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: 4px;
+    display: block;
+}
