@@ -12,6 +12,47 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     <title>Control de Préstamos</title>
     <link rel="stylesheet" href="public/assets/style.css">
 </head>
+
+<script>
+function validarFormulario() {
+    const equipo = document.getElementById("equipo").value;
+    const serial = document.getElementById("serial").value;
+    const aprendiz = document.getElementById("aprendiz").value;
+    const ficha = document.getElementById("ficha").value;
+
+    // Solo letras
+    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+    // Letras y números
+    const letrasNumeros = /^[A-Za-z0-9]+$/;
+
+    // Solo números
+    const soloNumeros = /^[0-9]+$/;
+
+    if (!soloLetras.test(equipo)) {
+        alert("El campo Equipo solo puede contener letras");
+        return false;
+    }
+
+    if (!letrasNumeros.test(serial)) {
+        alert("El Serial solo puede contener letras y números, sin símbolos");
+        return false;
+    }
+
+    if (!soloLetras.test(aprendiz)) {
+        alert("El campo Aprendiz solo puede contener letras");
+        return false;
+    }
+
+    if (!soloNumeros.test(ficha)) {
+        alert("El campo Ficha solo puede contener números");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
 <body>
 
 <h1>Control de Préstamos de Equipos</h1>
