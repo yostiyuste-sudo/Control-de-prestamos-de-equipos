@@ -1,6 +1,4 @@
-/* ===============================
-   ESTILO GENERAL
-================================ */
+
 * {
     box-sizing: border-box;
 }
@@ -8,77 +6,68 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-    background-color: #eef1f5;
-    color: #2c3e50;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background-color: #faf6f5;
+    color: #4a3f45;
 }
 
-/* ===============================
-   TITULO
-================================ */
+
 h1 {
     text-align: center;
-    background-color: #1f3c88;
-    color: #ffffff;
-    padding: 20px;
-    margin: 0 0 25px 0;
-    letter-spacing: 1px;
+    padding: 16px;
+    margin-bottom: 24px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #8b5e83; /* malva */
 }
 
-/* ===============================
-   FORMULARIO
-================================ */
+
 form {
-    max-width: 700px;
+    max-width: 650px;
     margin: auto;
     background: #ffffff;
-    padding: 25px;
+    padding: 24px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #f0d9d4;
 }
 
 form input,
 form textarea,
 form button {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
     font-size: 14px;
 }
 
 form input,
 form textarea {
-    border: 1px solid #ccd1d9;
-    border-radius: 4px;
-}
-
-form textarea {
-    resize: none;
-    height: 80px;
+    border: 1px solid #f2cfc7;
+    border-radius: 6px;
+    background: #fff7f5;
 }
 
 form input:focus,
 form textarea:focus {
     outline: none;
-    border-color: #1f3c88;
+    border-color: #ee8c8c;
+    background: #ffffff;
 }
 
 /* ===============================
-   BOTON FORMULARIO
+   BOTÓN
 ================================ */
 form button {
-    background-color: #1f3c88;
+    background-color: #ee8c8c; /* coral */
     color: #ffffff;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    transition: background 0.3s;
 }
 
 form button:hover {
-    background-color: #162e66;
+    background-color: #e07b7b;
 }
 
 /* ===============================
@@ -86,59 +75,56 @@ form button:hover {
 ================================ */
 table {
     width: 90%;
-    margin: 30px auto;
+    margin: 28px auto;
     border-collapse: collapse;
     background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #f0d9d4;
     border-radius: 8px;
     overflow: hidden;
 }
 
 th {
-    background-color: #1f3c88;
+    background-color: #f7b7a3; /* durazno */
     color: #ffffff;
     padding: 12px;
-    text-transform: uppercase;
     font-size: 13px;
+    font-weight: 600;
 }
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #e1e5eb;
+    border-bottom: 1px solid #f4e1dc;
     font-size: 14px;
     text-align: center;
 }
 
-tr:nth-child(even) {
-    background-color: #f7f9fc;
+tr:last-child td {
+    border-bottom: none;
 }
 
 /* ===============================
    ESTADOS
 ================================ */
-td:nth-child(4) {
-    font-weight: bold;
+.estado-prestamo {
+    color: #c76c86; /* rosa viejo */
+    font-weight: 600;
 }
 
-td:nth-child(4):contains("En préstamo") {
-    color: #c0392b;
-}
-
-td:nth-child(4):contains("Devuelto") {
-    color: #27ae60;
+.estado-devuelto {
+    color: #8b5e83; /* malva */
+    font-weight: 600;
 }
 
 /* ===============================
-   LINKS / ACCIONES
+   LINKS
 ================================ */
 a {
-    text-decoration: none;
-    color: #1f3c88;
-    font-weight: bold;
+    color: #c76c86;
+    font-weight: 500;
 }
 
 a:hover {
-    text-decoration: underline;
+    opacity: 0.8;
 }
 
 /* ===============================
@@ -153,4 +139,24 @@ a:hover {
         font-size: 12px;
     }
 }
- 
+
+/* ===============================
+   CONTENEDOR GENERAL
+================================ */
+.app-container {
+    max-width: 700px;   /* mismo tamaño del formulario */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===============================
+   TABLA DENTRO DEL CONTENEDOR
+================================ */
+.tabla-container {
+    margin-top: 30px;
+}
+
+.tabla-container table {
+    width: 100%;
+    margin: 0;
+}
