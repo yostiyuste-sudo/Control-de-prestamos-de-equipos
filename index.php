@@ -13,7 +13,7 @@ $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll(
     <link rel="stylesheet" href="public/assets/style.css">
 </head>
 <body>
-
+<div class="app-container">
 <h1>Control de Préstamos de Equipos</h1>
 
 <form action="php/GuardarPrestamo.php" method="POST" id="formPrestamo">
