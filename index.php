@@ -2,9 +2,6 @@
 require_once 'php/Database.php';
 $conn = Database::conectar();
 
-/* ===============================
-   ACTIVAR / INACTIVAR PRESTAMO
-   =============================== */
 if (isset($_GET['accion']) && $_GET['accion'] === 'estado') {
     $id = (int) $_GET['id'];
     $estado = (int) $_GET['estado'];
@@ -18,9 +15,6 @@ if (isset($_GET['accion']) && $_GET['accion'] === 'estado') {
     exit;
 }
 
-/* ===============================
-   LISTAR PRESTAMOS
-   =============================== */
 $prestamos = $conn->query("SELECT * FROM prestamos ORDER BY id DESC")->fetchAll();
 ?>
 
