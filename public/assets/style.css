@@ -1,5 +1,4 @@
-
-* {
+{
     box-sizing: border-box;
 }
 
@@ -11,16 +10,14 @@ body {
     color: #4a3f45;
 }
 
-
 h1 {
     text-align: center;
     padding: 16px;
     margin-bottom: 24px;
     font-size: 22px;
     font-weight: 600;
-    color: #8b5e83; /* malva */
+    color: #8b5e83; 
 }
-
 
 form {
     max-width: 650px;
@@ -53,12 +50,8 @@ form textarea:focus {
     border-color: #ee8c8c;
     background: #ffffff;
 }
-
-/* ===============================
-   BOTÓN
-================================ */
 form button {
-    background-color: #ee8c8c; /* coral */
+    background-color: #ee8c8c; 
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -70,9 +63,6 @@ form button:hover {
     background-color: #e07b7b;
 }
 
-/* ===============================
-   TABLA
-================================ */
 table {
     width: 90%;
     margin: 28px auto;
@@ -84,7 +74,7 @@ table {
 }
 
 th {
-    background-color: #f7b7a3; /* durazno */
+    background-color: #f7b7a3; 
     color: #ffffff;
     padding: 12px;
     font-size: 13px;
@@ -102,22 +92,15 @@ tr:last-child td {
     border-bottom: none;
 }
 
-/* ===============================
-   ESTADOS
-================================ */
 .estado-prestamo {
-    color: #c76c86; /* rosa viejo */
+    color: #c76c86; 
     font-weight: 600;
 }
 
 .estado-devuelto {
-    color: #8b5e83; /* malva */
+    color: #8b5e83; 
     font-weight: 600;
-}
 
-/* ===============================
-   LINKS
-================================ */
 a {
     color: #c76c86;
     font-weight: 500;
@@ -127,9 +110,6 @@ a:hover {
     opacity: 0.8;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
 @media (max-width: 768px) {
     form, table {
         width: 95%;
@@ -140,18 +120,14 @@ a:hover {
     }
 }
 
-/* ===============================
-   CONTENEDOR GENERAL
-================================ */
+
 .app-container {
-    max-width: 700px;   /* mismo tamaño del formulario */
+    max-width: 700px;   
     margin: 0 auto;
     padding: 20px;
 }
 
-/* ===============================
-   TABLA DENTRO DEL CONTENEDOR
-================================ */
+
 .tabla-container {
     margin-top: 30px;
 }
